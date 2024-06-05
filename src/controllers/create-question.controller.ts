@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  Post,
-  UseGuards,
-  UsePipes,
-} from '@nestjs/common'
+import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
 import { PrismaService } from 'src/prisma/prisma.service'
 import { z } from 'zod'
 import { ZodValidationPipe } from 'src/pipes/zod-validation-pipe'
@@ -15,12 +8,12 @@ import { UserPayload } from 'src/auth/jwt.strategy'
 
 const createQuestionBodySchema = z.object({
   title: z.string(),
-  slug: z.string(),
   content: z.string(),
-  authorId: z.string(),
 })
 
 type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
+
+const bodyValidationPipe = new ZodValidationPipe(createQuestionBodySchema)
 
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
@@ -29,14 +22,31 @@ export class CreateQuestionController {
 
   @Post()
   @HttpCode(201)
-  @UsePipes(new ZodValidationPipe(createQuestionBodySchema))
   async handle(
-    @Body() body: CreateQuestionBodySchema,
+    @Body(bodyValidationPipe) body: CreateQuestionBodySchema,
     @CurrentUserDecorator() user: UserPayload,
   ) {
-    return {
-      body,
-      user,
-    }
+    const { title, content } = body
+    const { sub: authorId } = user
+
+    const slug = this.convertToSlog(title)
+
+    await this.prisma.question.create({
+      data: {
+        authorId,
+        title,
+        content,
+        slug,
+      },
+    })
+  }
+
+  private convertToSlog(title: string): string {
+    return title
+      .toLocaleLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s/g, '-')
   }
 }

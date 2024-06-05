@@ -30,8 +30,6 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "teste",
-    "slug": "teste",
-    "content": "teste",
-    "authorId": "teste"
+    "title": "Título Teste",
+    "content": "Conteúdo Teste"
 }
