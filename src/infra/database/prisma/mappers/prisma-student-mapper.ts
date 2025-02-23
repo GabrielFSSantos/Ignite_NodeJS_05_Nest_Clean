@@ -1,6 +1,5 @@
 import { UniqueEntityId } from '@/core/entities/unique-entity-id'
 import { Student } from '@/domain/forum/enterprise/entities/student'
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'
 import { User as PrismaUser, Prisma } from '@prisma/client'
 
 export class PrismaStudentMapper {
