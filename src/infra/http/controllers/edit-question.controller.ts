@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, Param, Put } from '@nestjs/common'
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpCode,
+  Param,
+  Put,
+} from '@nestjs/common'
 import { z } from 'zod'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
 import { CurrentUserDecorator } from '@/infra/auth/current-user.decorator'
@@ -28,12 +35,16 @@ export class EditQuestionController {
     const { title, content } = body
     const { sub: authorId } = user
 
-    await this.editQuestion.execute({
+    const result = await this.editQuestion.execute({
       questionId,
       authorId,
       title,
       content,
       attachmentsIds: [],
     })
+
+    if (result.isLeft()) {
+      throw new BadRequestException()
+    }
   }
 }
