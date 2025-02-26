@@ -27,14 +27,16 @@ import { ChooseQuestionBestAnswerController } from './controllers/choose-questio
 import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-cases/choose-question-best-answer'
 import { CommentOnQuestionController } from './controllers/comment-on-question.controller'
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question'
-import { DeleteQuestionCommentController } from './controllers/delete-question-comment'
+import { DeleteQuestionCommentController } from './controllers/delete-question-comment.controller'
 import { DeleteQuestionCommentUseCase } from '@/domain/forum/application/use-cases/delete-question-comment'
 import { CommentOnAnswerController } from './controllers/comment-on-answer.controller'
 import { CommentOnAnswerUseCase } from '@/domain/forum/application/use-cases/comment-on-answer'
-import { DeleteAnswerCommentController } from './controllers/delete-answer-comment'
+import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller'
 import { DeleteAnswerCommentUseCase } from '@/domain/forum/application/use-cases/delete-answer-comment'
-import { FetchQuestionCommentsController } from './controllers/fetch-question-comments'
+import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller'
 import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-question-comments'
+import { FetchAnswerCommentsController } from './controllers/fetch-answer-comment.controller'
+import { FetchAnswerCommentsUseCase } from '@/domain/forum/application/use-cases/fetch-answer-comments'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule],
@@ -56,6 +58,7 @@ import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cas
     CommentOnAnswerController,
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
+    FetchAnswerCommentsController,
   ],
   providers: [
     CreateQuestionUseCase,
@@ -75,6 +78,7 @@ import { FetchQuestionCommentsUseCase } from '@/domain/forum/application/use-cas
     CommentOnAnswerUseCase,
     DeleteAnswerCommentUseCase,
     FetchQuestionCommentsUseCase,
+    FetchAnswerCommentsUseCase,
   ],
 })
 export class HttpModule {}
