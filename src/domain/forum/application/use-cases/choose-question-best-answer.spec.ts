@@ -23,6 +23,9 @@ describe('Choose Question Best Answer', () => {
       inMemoryQuestionAttachmentsRepository,
     )
 
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository()
+
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryAnswerAttachmentsRepository,
     )
