@@ -48,20 +48,26 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     })
 
     if (!author) {
-      throw new Error(`Author with ID "${question.authorId.toString()}" does not exist.`,)
+      throw new Error(
+        `Author with ID "${question.authorId.toString()}" does not exist.`,
+      )
     }
 
-    const questionAttachments = this.questionAttachmentsRepository.items.filter((questionAttachment) => {
-      return questionAttachment.questionId.equals(question.id)
-    })
+    const questionAttachments = this.questionAttachmentsRepository.items.filter(
+      (questionAttachment) => {
+        return questionAttachment.questionId.equals(question.id)
+      },
+    )
 
     const attachments = questionAttachments.map((questionAttachment) => {
       const attachment = this.attachmentsRepository.items.find((attachment) => {
         return attachment.id.equals(questionAttachment.attachmentId)
       })
 
-      if(!attachment) {
-        throw new Error(`Attachment with ID "${questionAttachment.attachmentId.toString()}" does not exist.`,)
+      if (!attachment) {
+        throw new Error(
+          `Attachment with ID "${questionAttachment.attachmentId.toString()}" does not exist.`,
+        )
       }
 
       return attachment
@@ -79,7 +85,6 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
       createdAt: question.createdAt,
       updatedAt: question.updatedAt,
     })
-
   }
 
   async findManyRecent({ page }: PaginationParams): Promise<Question[]> {

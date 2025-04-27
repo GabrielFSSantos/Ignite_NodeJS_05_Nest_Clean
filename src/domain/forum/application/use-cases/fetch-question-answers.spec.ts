@@ -16,8 +16,7 @@ describe('Fetch Recent Answers', () => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
 
-    inMemoryStudentsRepository =
-      new InMemoryStudentsRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
 
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
       inMemoryStudentsRepository,
@@ -29,7 +28,7 @@ describe('Fetch Recent Answers', () => {
 
   it('should be able to fetch question answers', async () => {
     const student = makeStudent({ name: 'John Doe' })
-    
+
     inMemoryStudentsRepository.items.push(student)
 
     const answer1 = makeAnswer({
@@ -54,7 +53,7 @@ describe('Fetch Recent Answers', () => {
       page: 1,
     })
 
-        expect(result.value?.answers).toHaveLength(3)
+    expect(result.value?.answers).toHaveLength(3)
     expect(result.value?.answers).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

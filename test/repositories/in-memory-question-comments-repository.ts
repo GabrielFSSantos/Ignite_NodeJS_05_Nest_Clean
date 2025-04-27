@@ -56,7 +56,7 @@ export class InMemoryQuestionCommentsRepository
           authorId: comment.authorId,
           author: author.name,
           createdAt: comment.createdAt,
-          updatedAt: comment.updatedAt,
+          updatedAt: comment.updatedAt || null,
         })
       })
 

@@ -9,7 +9,7 @@ export class InMemoryAnswerCommentsRepository
 {
   public items: AnswerComment[] = []
 
-  constructor( private studentsRepository: InMemoryStudentsRepository) {}
+  constructor(private studentsRepository: InMemoryStudentsRepository) {}
 
   async findById(id: string): Promise<AnswerComment | null> {
     const answerComment = this.items.find((item) => item.id.toString() === id)
@@ -56,7 +56,7 @@ export class InMemoryAnswerCommentsRepository
           authorId: comment.authorId,
           author: author.name,
           createdAt: comment.createdAt,
-          updatedAt: comment.updatedAt,
+          updatedAt: comment.updatedAt || null,
         })
       })
 

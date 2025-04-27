@@ -1,5 +1,4 @@
 import { Either, right } from '@/core/either'
-import { Answer } from '../../enterprise/entities/answer'
 import { AnswerWithAuthor } from '../../enterprise/entities/value-objects/answer-with-author'
 import { AnswersRepository } from '../repositories/answers-repository'
 import { Injectable } from '@nestjs/common'

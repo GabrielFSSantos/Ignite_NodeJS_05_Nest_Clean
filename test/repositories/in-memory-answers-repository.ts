@@ -48,9 +48,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
         })
 
         if (!author) {
-          throw new Error(
-            `Author with ID "${answer.authorId}" does not exist.`,
-          )
+          throw new Error(`Author with ID "${answer.authorId}" does not exist.`)
         }
 
         return AnswerWithAuthor.create({
@@ -59,7 +57,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
           authorId: answer.authorId,
           author: author.name,
           createdAt: answer.createdAt,
-          updatedAt: answer.updatedAt,
+          updatedAt: answer.updatedAt || null,
         })
       })
 

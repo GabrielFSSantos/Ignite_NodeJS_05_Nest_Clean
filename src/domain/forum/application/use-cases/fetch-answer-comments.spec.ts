@@ -12,13 +12,15 @@ let sut: FetchAnswerCommentsUseCase
 describe('Fetch Recent Answer Comments', () => {
   beforeEach(() => {
     inMemoryStudentsRepository = new InMemoryStudentsRepository()
-    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(inMemoryStudentsRepository)
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentsRepository,
+    )
     sut = new FetchAnswerCommentsUseCase(inMemoryAnswerCommentsRepository)
   })
 
   it('should be able to fetch answer answer comments', async () => {
     const student = makeStudent({ name: 'John Doe' })
-    
+
     inMemoryStudentsRepository.items.push(student)
 
     const comment1 = makeAnswerComment({
