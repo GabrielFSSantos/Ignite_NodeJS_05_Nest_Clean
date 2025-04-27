@@ -13,7 +13,9 @@ import { makeAnswer } from 'test/factories/make-answer'
 import { makeQuestion } from 'test/factories/make-question'
 import { SpyInstance } from 'vitest'
 import { waitFor } from 'test/utils/wait.for'
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository
@@ -38,7 +40,10 @@ describe('On Answer Created', () => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
 
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
+
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryStudentsRepository,
       inMemoryAnswerAttachmentsRepository,
     )
 

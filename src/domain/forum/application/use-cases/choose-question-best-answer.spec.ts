@@ -7,7 +7,9 @@ import { makeAnswer } from 'test/factories/make-answer'
 import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { InMemoryQuestionAttachmentsRepository } from 'test/repositories/in-memory-question-attachments-repository'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryAnswersRepository: InMemoryAnswersRepository
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
@@ -26,7 +28,10 @@ describe('Choose Question Best Answer', () => {
     inMemoryAnswerAttachmentsRepository =
       new InMemoryAnswerAttachmentsRepository()
 
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
+
     inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryStudentsRepository,
       inMemoryAnswerAttachmentsRepository,
     )
 
