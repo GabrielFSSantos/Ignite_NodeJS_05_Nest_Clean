@@ -9,7 +9,6 @@ import { QuestionAttachmentFactory } from 'test/factories/make-question-attachme
 import { CacheRepository } from '@/infra/cache/cache-repository'
 import { CacheModule } from '@/infra/cache/cache.module'
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
-import { empty } from '@prisma/client/runtime/library'
 
 describe('Prisma Question Repository (E2E)', () => {
   let app: INestApplication
